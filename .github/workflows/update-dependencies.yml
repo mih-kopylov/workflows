@@ -1,0 +1,27 @@
+name: update-dependencies
+
+on:
+  workflow_call:
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+      - name: Configure golang
+        uses: actions/setup-go@v3
+        with:
+          go-version-file: "go.mod"
+          check-latest: true
+      - name: Update dependencies
+        run: |
+          go get -u -t ./...
+          go mod tidy
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: "[CI] Update dependencies"
+          branch: update-dependencies
+          delete-branch: true
+          title: "[CI] Update dependencies"
