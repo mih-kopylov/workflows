@@ -1,0 +1,37 @@
+name: build
+
+on:
+  workflow_call:
+    inputs:
+      app:
+        description: Path to the application to run to generate the documentation
+        type: string
+        default: ./app/docs
+
+jobs:
+  build-wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+      - name: Configure golang
+        uses: actions/setup-go@v3
+        with:
+          go-version-file: "go.mod"
+          check-latest: true
+      - name: Checkout wiki repository
+        uses: actions/checkout@v3
+        with:
+          repository: ${{github.repository}}.wiki
+          path: dist/docs
+      - name: Build docs
+        run: |
+          go run ${{inputs.app}}
+      - name: Commit files
+        run: |
+          cd dist/docs
+          git config user.email "mih-kopylov@users.noreply.github.com"
+          git config user.name "Mikhail Kopylov"
+          git add .
+          git diff --staged --quiet || git commit -m "[CI] Generate documentation"
+          git push origin master
