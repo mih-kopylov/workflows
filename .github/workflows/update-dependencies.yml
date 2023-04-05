@@ -19,7 +19,7 @@ jobs:
           go get -u -t ./...
           go mod tidy
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5
         with:
           commit-message: "[CI] Update dependencies"
           branch: update-dependencies
