@@ -2,6 +2,10 @@ name: update-dependencies
 
 on:
   workflow_call:
+    secrets:
+      token:
+        description: Personal Access Token that has permissions to push changes to a repository and to create pull requests
+        required: true
 
 jobs:
   update-dependencies:
@@ -9,6 +13,8 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.token }}
       - name: Configure golang
         uses: actions/setup-go@v4
         with:
@@ -21,6 +27,7 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@v5
         with:
+          token: ${{ secrets.token }}
           commit-message: "[CI] Update dependencies"
           branch: update-dependencies
           delete-branch: true
