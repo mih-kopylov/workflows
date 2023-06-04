@@ -18,3 +18,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.token }}
           MERGE_LABELS: automerge
           MERGE_DELETE_BRANCH: true
+          MERGE_READY_STATE: clean,has_hooks
