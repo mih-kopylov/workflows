@@ -31,4 +31,5 @@ jobs:
           commit-message: "[CI] Update dependencies"
           branch: update-dependencies
           delete-branch: true
+          labels: automerge
           title: "[CI] Update dependencies"
