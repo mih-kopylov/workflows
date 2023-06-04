@@ -19,3 +19,5 @@ jobs:
           MERGE_LABELS: automerge
           MERGE_DELETE_BRANCH: true
           MERGE_READY_STATE: clean,has_hooks
+          MERGE_RETRIES: 60
+          MERGE_RETRY_SLEEP: 10000
