@@ -43,7 +43,7 @@ jobs:
       - name: Run tests
         run: go test ./...
       - name: Build
-        uses: goreleaser/goreleaser-action@v4
+        uses: goreleaser/goreleaser-action@v5
         with:
           args: build --snapshot --single-target
       - name: Log in to the Container registry
