@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Configure git
         run: |
           git config --global user.email "mih-kopylov@users.noreply.github.com"
@@ -24,7 +24,7 @@ jobs:
           go-version-file: "go.mod"
           check-latest: true
       - name: Checkout wiki repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: ${{github.repository}}.wiki
           path: dist/docs
